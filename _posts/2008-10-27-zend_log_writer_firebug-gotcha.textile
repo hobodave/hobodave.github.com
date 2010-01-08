@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Zend_Log_Writer_Firebug gotcha_
 ---
 A few weeks ago I found a gem of a class called "Zend_Log_Writer_Firebug":http://framework.zend.com/manual/en/zend.log.writers.html#zend.log.writers.firebug within "Zend Framework":http://framework.zend.com/. It really is a *must have* when it comes to debug logging.
 
