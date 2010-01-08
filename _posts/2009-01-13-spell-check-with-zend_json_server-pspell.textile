@@ -23,7 +23,81 @@ h3. Files
 
 h4. SpellCheck.php
 
-<script src="http://gist.github.com/100387.js"></script>
+{% highlight php linenos %}
+<?php
+/**
+ * SpellCheck
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://hobodave.com/license.txt
+ *
+ * @package    SpellCheck
+ * @copyright  Copyright (c) 2008-2009 David Abdemoulaie (http://hobodave.com/)
+ * @license    http://hobodave.com/license.txt New BSD License
+ */
+class SpellCheck
+{
+    protected function __construct()
+    {
+        $this->_getDict();
+    }
+
+    public function check($word)
+    {
+        $dict = $this->_getDict();
+        return pspell_check($dict, $word);
+    }
+
+    public function suggest($word)
+    {
+        $dict = $this->_getDict();
+        return pspell_suggest($dict, $word);
+    }
+
+    public function checktext($text)
+    {
+        $dict = $this->_getDict();
+        $matches = array();
+
+        $result = array(
+            'c' => array()
+        );
+
+        preg_match_all(
+            '/\w+/',
+            $text,
+            $matches,
+            PREG_OFFSET_CAPTURE|PREG_PATTERN_ORDER);
+        foreach($matches[0] as $match) {
+            if (pspell_check($dict,$match[0])) {
+                continue;
+            }
+            $suggestions = pspell_suggest($dict,$match[0]);
+
+            $correction = array(
+                'o' => $match[1],
+                'l' => strlen($match[0]),
+                't' => array_slice($suggestions, 0, 5)
+            );
+            $result['c'][] = $correction;
+        }
+
+        return $result;
+    }
+
+    protected function _getDict()
+    {
+        if ($this->_dict === null) {
+            $this->_dict = pspell_new('en', '', '', '', PSPELL_FAST);
+        }
+        return $this->_dict;
+    }
+}
+{% endhighlight %}
 
 This class exposes three methods via the JSON-RPC interface: *check*, *suggest*, and *checkText*. As you can see, check and suggest are simple wrappers for "pspell_check":http://us3.php.net/manual/en/function.pspell-check.php and "pspell_suggest":http://us3.php.net/manual/en/function.pspell-suggest.php respectively. They each operate on only a single word.
 
@@ -31,13 +105,74 @@ The *checkText* method combines the features of both check and suggest, and work
 
 h4. json-rpc.php
 
-<script src="http://gist.github.com/100396.js"></script>
+{% highlight php linenos %}
+<?php
+set_include_path('./lib:.');
+
+include 'lib/Zend/Loader.php';
+Zend_Loader::registerAutoload();
+
+$server = new Zend_Json_Server();
+$server->setClass('SpellCheck');
+if ('GET' == $_SERVER['REQUEST_METHOD']) {
+    $server->setTarget('/spell/json-rpc.php')
+           ->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);
+
+    $smd = $server->getServiceMap();
+
+    header('Content-Type: application/json-rpc');
+    echo $smd;
+    return;
+}
+
+$server->handle();
+{% endhighlight %}
 
 This is the wonderfully simple class that sets up our Zend_JSON_Server and handles requests. I love that Zend_Json allows me to do this in only 20 lines of code.
 
 h4. spellcheck.js (optional)
 
-<script src="http://gist.github.com/100397.js"></script>
+{% highlight javascript %}
+var SpellChecker = Class.create({
+  initialize: function(url, callback, options) {
+    this.url = url;
+    this.callback = callback;
+    this.options = {
+      rpcRequest: {
+          jsonrpc:"2.0",
+          method:"",
+          params: [],
+          id: Math.floor(Math.random() * 100)
+      },
+      request: {
+          method: "post",
+          contentType: "application/json-rpc",
+          requestHeaders: { Accept: "application/json-rpc" },
+          onSuccess: callback
+      }
+    }
+    Object.extend(this.options,options || {});
+  },
+  check: function(word) {
+    rpcRequest = Object.extend(Object.clone(this.options.rpcRequest), {method:"check",params:[word]});
+    this.sendRequest(rpcRequest);
+  },
+  suggest: function(word) {
+    rpcRequest = Object.extend(Object.clone(this.options.rpcRequest), {method:"suggest",params:[word]});
+    this.sendRequest(rpcRequest);
+  },
+  checkText: function(text) {
+    rpcRequest = Object.extend(Object.clone(this.options.rpcRequest), {method:"checktext",params:[text]});
+    this.sendRequest(rpcRequest);
+  },
+  sendRequest: function(request) {
+    ajaxOptions = Object.extend(Object.clone(this.options.request), {
+        postBody: Object.toJSON(request)
+    })
+    new Ajax.Request(this.url, ajaxOptions);
+  }
+})
+{% endhighlight %}
 
 h3. Usage
 
@@ -45,40 +180,68 @@ The usage examples will assume you are using the Prototype client shown above, t
 
 h4. Example 1
 
-<script src="http://gist.github.com/100399.js"></script>
+{% highlight javascript %}
+var fb = function(transport) {
+  console.log(transport.responseJSON);
+}
+var sc = new SpellChecker('/spell/json-rpc.php', fb);
+sc.check('sevne');
+{% endhighlight %}
 
 This checks if the word 'sevne' is a properly spelled word.
 
 h4. Output
 
-<script src="http://gist.github.com/100401.js"></script>
+{% highlight javascript %}
+{
+  "result":false,
+  "id":"48",
+  "jsonrpc":"2.0"
+}
+{% endhighlight %}
 
 The output shows that the result is *false*, it is not a correctly spelled word.
 
 h4. Example 2
 
-<pre>
-<code>
+{% highlight javascript %}
 sc.suggest('sevne');
-</code>
-</pre>
+{% endhighlight %}
+
 This asks for suggested spellings for 'sevne'.
 
 h4. Output
 
-<script src="http://gist.github.com/100402.js"></script>
+{% highlight javascript %}
+{
+  "result": ["seven","Sven","Severn","Seine","seine","Steven","scene","seen","Even","even","serve","serving"
+,"sever","sieve","sieving","sevens","Sen","Sivan","Svend","sen","Keven","semen","seiner","Levine","Selene"
+,"Seline","Serene","Sterne","serene","severe","Savina","Sean","Sena","sane","save","saving","sewn","sine"
+,"Ferne","Seana","senna","Sven's","seven's"],
+  "id":"48",
+  "jsonrpc":"2.0"
+}
+{% endhighlight %}
 
 In this case the *result* is an array of the forty most likely substitutes for this word.
 
 h4. Example 3
 
-<script src="http://gist.github.com/100404.js"></script>
+{% highlight javascript %}
+sc.checkText('Four score and sevne years ago our fathres brought forth on this continnent a new nation.');
+{% endhighlight %}
 
 This is likely the most useful usage of all, as it avoids the need for multiple calls to the server.
 
 h4. Output
 
-<script src="http://gist.github.com/100405.js"></script>
+{% highlight javascript %}
+{"result": {"c": [
+  {"o":15,"l":5,"t":["seven","Sven","Severn","Seine","seine"]},
+  {"o":35,"l":7,"t":["Fathers","fathers","Father's","father's","feathers"]},
+  {"o":65,"l":10,"t":["Continent","continent","contingent","containment","continents"]}]},
+"id":"48","jsonrpc":"2.0"}
+{% endhighlight %}
 
 The result in this case is a slightly more complex JSON Object than the other examples.
 
