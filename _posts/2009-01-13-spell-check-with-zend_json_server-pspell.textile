@@ -1,0 +1,100 @@
+---
+layout: post
+---
+An application I've been working on has had a desire for spell check capabilities for some time now. As most browsers provide native methods for this, it has remained on the back burner until now.
+
+I decided to use "Zend_Json_Server":http://framework.zend.com/manual/en/zend.json.server.html for a few reasons:
+
+# I wanted to avoid the overhead required to bootstrap and route requests in my <span class="caps">MVC</span> <a href="http://framework.zend.com/">Zend_Framework</a> app
+# I wanted to tinker with Zend's easy to use JSON-RPC magic
+# I try to avoid XML (and thus <a href="http://framework.zend.com/manual/en/zend.xmlrpc.html"><span class="caps">XML</span>-RPC</a>) as much as possible
+
+h3. Requirements
+
+Your server _requires_ the following for the JSON-RPC server to work:
+* "Zend Framework":http://framework.zend.com/ = 1.7
+* "pspell":http://us3.php.net/manual/en/book.pspell.php
+
+To use the javascript client (optional):
+* "Prototype":http://www.prototypejs.org/ = 1.6
+
+h3. Files
+
+h4. SpellCheck.php
+
+<script src="http://gist.github.com/100387.js"></script>
+
+This class exposes three methods via the JSON-RPC interface: *check*, *suggest*, and *checkText*. As you can see, check and suggest are simple wrappers for "pspell_check":http://us3.php.net/manual/en/function.pspell-check.php and "pspell_suggest":http://us3.php.net/manual/en/function.pspell-suggest.php respectively. They each operate on only a single word.
+
+The *checkText* method combines the features of both check and suggest, and works on strings consisting of an arbitrary number of words. It also returns an object detailing all the spelling errors found, as well as the top five suggestions for them.
+
+h4. json-rpc.php
+
+<script src="http://gist.github.com/100396.js"></script>
+
+This is the wonderfully simple class that sets up our Zend_JSON_Server and handles requests. I love that Zend_Json allows me to do this in only 20 lines of code.
+
+h4. spellcheck.js (optional)
+
+<script src="http://gist.github.com/100397.js"></script>
+
+h3. Usage
+
+The usage examples will assume you are using the Prototype client shown above, though any client could be used. They also assume you have firebug installed, and thus can use the console.log() method.
+
+h4. Example 1
+
+<script src="http://gist.github.com/100399.js"></script>
+
+This checks if the word 'sevne' is a properly spelled word.
+
+h4. Output
+
+<script src="http://gist.github.com/100401.js"></script>
+
+The output shows that the result is *false*, it is not a correctly spelled word.
+
+h4. Example 2
+
+<pre>
+<code>
+sc.suggest('sevne');
+</code>
+</pre>
+This asks for suggested spellings for 'sevne'.
+
+h4. Output
+
+<script src="http://gist.github.com/100402.js"></script>
+
+In this case the *result* is an array of the forty most likely substitutes for this word.
+
+h4. Example 3
+
+<script src="http://gist.github.com/100404.js"></script>
+
+This is likely the most useful usage of all, as it avoids the need for multiple calls to the server.
+
+h4. Output
+
+<script src="http://gist.github.com/100405.js"></script>
+
+The result in this case is a slightly more complex JSON Object than the other examples.
+
+I'll do my best to explain this clearly.
+
+* result is a JSON _Object_ with a single property 'c' (corrections).
+* result.c is an _Array_ of corrections
+* each correction is an _Object_ with the following properties
+
+table{border: 1px solid black}.
+|_. Property|_. Description|
+|o|The offset of the misspelled word from the beginning of the text|
+|l|The length of the misspelled word|
+|t| An _Array_ of the _top five_ suggestions for the misspelled word|
+
+The syntax of the *checkText* method was inspired by Google's spell checkAPI that is part of the Google Toolbar. My thanks to "Paul Welter":http://weblogs.asp.net/pwelter34/archive/2005/07/19/419838.aspx for reverse engineering it and posting the results.
+
+h3. Conclusion
+
+This wraps up my fun, though admittedly simple, example of Zend_Json. (I think I spent more time on this blog post than the actual code).

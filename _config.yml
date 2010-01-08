@@ -1,0 +1,12 @@
+auto: true
+destination: ./_site
+lsi:         true
+markdown:    maruku
+maruku:
+  use_tex:    false
+  use_divs:   false
+  png_dir:    images/latex
+  png_url:    /images/latex
+permalink: pretty
+pygments: true
+server_port: 4000
