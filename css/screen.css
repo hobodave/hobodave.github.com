@@ -34,3 +34,9 @@ div.highlight pre {
   background-color: #eeeeee;
   border: 1px solid #aaaaaa;
 }
+
+.footer {
+  border-top: 4px solid #eeeeee;
+}
+
+.rss img { float: right; }
