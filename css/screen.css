@@ -28,6 +28,7 @@ ul.posts {
 
 ul.posts span {
   color: #AAAAAA;
+  font-family: Monaco,"Courier New",monospace;
 }
 
 div.highlight pre {
