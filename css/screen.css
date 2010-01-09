@@ -12,6 +12,10 @@ a {
   text-decoration: none;
 }
 
+a.comment_count {
+  margin-left: 1em;
+}
+
 .site .title a.extra {
   color: #AAAAAA;
   margin-left: 1em;
