@@ -2,26 +2,29 @@
 layout: post
 title: Spell check with Zend_Json_Server & pspell
 ---
-An application I've been working on has had a desire for spell check capabilities for some time now. As most browsers provide native methods for this, it has remained on the back burner until now.
+An application I've been working on has had a desire for spell check capabilities for some time now. As most browsers
+provide native methods for this, it has remained on the back burner until now.
 
-I decided to use "Zend_Json_Server":http://framework.zend.com/manual/en/zend.json.server.html for a few reasons:
+I decided to use [Zend_Json_Server][1] for a few reasons:
 
-# I wanted to avoid the overhead required to bootstrap and route requests in my <span class="caps">MVC</span> <a href="http://framework.zend.com/">Zend_Framework</a> app
-# I wanted to tinker with Zend's easy to use JSON-RPC magic
-# I try to avoid XML (and thus <a href="http://framework.zend.com/manual/en/zend.xmlrpc.html"><span class="caps">XML</span>-RPC</a>) as much as possible
+1. I wanted to avoid the overhead required to bootstrap and route requests in my MVC [Zend_Framework][2] app
+2. I wanted to tinker with Zend's easy to use JSON-RPC magic
+3. I try to avoid XML, and thus [XML-RPC][3], as much as possible
 
-h3. Requirements
+### Requirements
 
 Your server _requires_ the following for the JSON-RPC server to work:
-* "Zend Framework":http://framework.zend.com/ = 1.7
-* "pspell":http://us3.php.net/manual/en/book.pspell.php
+
+* [Zend Framework][2] = 1.7
+* [pspell][4]
 
 To use the javascript client (optional):
-* "Prototype":http://www.prototypejs.org/ = 1.6
 
-h3. Files
+* [Prototype][5] = 1.6
 
-h4. SpellCheck.php
+### Files
+
+#### SpellCheck.php
 
 {% highlight php %}
 <?php
@@ -97,13 +100,18 @@ class SpellCheck
         return $this->_dict;
     }
 }
+?>
 {% endhighlight %}
 
-This class exposes three methods via the JSON-RPC interface: *check*, *suggest*, and *checkText*. As you can see, check and suggest are simple wrappers for "pspell_check":http://us3.php.net/manual/en/function.pspell-check.php and "pspell_suggest":http://us3.php.net/manual/en/function.pspell-suggest.php respectively. They each operate on only a single word.
+This class exposes three methods via the JSON-RPC interface: **check**, **suggest**, and **checkText**. As you can see,
+check and suggest are simple wrappers for [pspell_check][6] and [pspell_suggest][7] respectively. They each operate on
+only a single word.
 
-The *checkText* method combines the features of both check and suggest, and works on strings consisting of an arbitrary number of words. It also returns an object detailing all the spelling errors found, as well as the top five suggestions for them.
+The **checkText** method combines the features of both check and suggest, and works on strings consisting of an
+arbitrary number of words. It also returns an object detailing all the spelling errors found, as well as the top five
+suggestions for them.
 
-h4. json-rpc.php
+#### json-rpc.php
 
 {% highlight php %}
 <?php
@@ -126,11 +134,13 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
 }
 
 $server->handle();
+?>
 {% endhighlight %}
 
-This is the wonderfully simple class that sets up our Zend_JSON_Server and handles requests. I love that Zend_Json allows me to do this in only 20 lines of code.
+This is the wonderfully simple class that sets up our Zend_Json_Server and handles requests. I love that Zend_Json
+allows me to do this in only 20 lines of code.
 
-h4. spellcheck.js (optional)
+#### spellcheck.js (optional)
 
 {% highlight javascript %}
 var SpellChecker = Class.create({
@@ -174,11 +184,12 @@ var SpellChecker = Class.create({
 })
 {% endhighlight %}
 
-h3. Usage
+### Usage
 
-The usage examples will assume you are using the Prototype client shown above, though any client could be used. They also assume you have firebug installed, and thus can use the console.log() method.
+The usage examples will assume you are using the Prototype client shown above, though any client could be used. They
+also assume you have firebug installed, and thus can use the console.log() method.
 
-h4. Example 1
+#### Example 1
 
 {% highlight javascript %}
 var fb = function(transport) {
@@ -190,7 +201,7 @@ sc.check('sevne');
 
 This checks if the word 'sevne' is a properly spelled word.
 
-h4. Output
+#### Output
 
 {% highlight javascript %}
 {
@@ -202,7 +213,7 @@ h4. Output
 
 The output shows that the result is *false*, it is not a correctly spelled word.
 
-h4. Example 2
+#### Example 2
 
 {% highlight javascript %}
 sc.suggest('sevne');
@@ -210,7 +221,7 @@ sc.suggest('sevne');
 
 This asks for suggested spellings for 'sevne'.
 
-h4. Output
+#### Output
 
 {% highlight javascript %}
 {
@@ -223,9 +234,9 @@ h4. Output
 }
 {% endhighlight %}
 
-In this case the *result* is an array of the forty most likely substitutes for this word.
+In this case the **result** is an array of the forty most likely substitutes for this word.
 
-h4. Example 3
+#### Example 3
 
 {% highlight javascript %}
 sc.checkText('Four score and sevne years ago our fathres brought forth on this continnent a new nation.');
@@ -233,7 +244,7 @@ sc.checkText('Four score and sevne years ago our fathres brought forth on this c
 
 This is likely the most useful usage of all, as it avoids the need for multiple calls to the server.
 
-h4. Output
+#### Output
 
 {% highlight javascript %}
 {"result": {"c": [
@@ -251,14 +262,25 @@ I'll do my best to explain this clearly.
 * result.c is an _Array_ of corrections
 * each correction is an _Object_ with the following properties
 
-table{border: 1px solid black}.
-|_. Property|_. Description|
-|o|The offset of the misspelled word from the beginning of the text|
-|l|The length of the misspelled word|
-|t| An _Array_ of the _top five_ suggestions for the misspelled word|
+<table border="1px" cellspacing="0" cellpadding="0">
+  <tr><th>Property</th><th>Description</th></tr>
+  <tr><td><strong>o</strong></td><td>The offset of the misspelled word from the beginning of the text</td></tr>
+  <tr><td><strong>l</strong></td><td>The length of the misspelled word</td></tr>
+  <tr><td><strong>t</strong></td><td>An <em>Array</em> of the <em>top five</em> suggestions for the misspelled word</td></tr>
+</table>
 
-The syntax of the *checkText* method was inspired by Google's spell checkAPI that is part of the Google Toolbar. My thanks to "Paul Welter":http://weblogs.asp.net/pwelter34/archive/2005/07/19/419838.aspx for reverse engineering it and posting the results.
+The syntax of the **checkText** method was inspired by Google's spell check API that is part of the Google Toolbar.
+My thanks to [Paul Welter][8] for reverse engineering it and posting the results.
 
-h3. Conclusion
+### Conclusion
 
 This wraps up my fun, though admittedly simple, example of Zend_Json. (I think I spent more time on this blog post than the actual code).
+
+[1]: http://framework.zend.com/manual/en/zend.json.server.html "Zend Json Server"
+[2]: http://framework.zend.com/ "Zend Framework"
+[3]: http://framework.zend.com/manual/en/zend.xmlrpc.html "Zend XML-RPC"
+[4]: http://us3.php.net/manual/en/book.pspell.php "pspell"
+[5]: http://www.prototypejs.org/ "prototype"
+[6]: http://us3.php.net/manual/en/function.pspell-check.php "pspell_check"
+[7]: http://us3.php.net/manual/en/function.pspell-suggest.php "pspell_suggest"
+[8]: http://weblogs.asp.net/pwelter34/archive/2005/07/19/419838.aspx "Paul Welter"

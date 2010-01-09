@@ -2,9 +2,11 @@
 layout: post
 title: PhpGhettoDoc - Document your PHP w/ ruby?
 ---
-In a moment of boredom I decided I needed a simple way to document a giant batch of PHP files with skeleton PhpDocblocks. PHP not being my first language, I decided why not do it in ruby. I find ruby scripting to be quick, fast enough, and it has lots of great easy to use modules (e.g., "Find":http://ruby-doc.org/core/classes/Find.html).
+In a moment of boredom I decided I needed a simple way to document a giant batch of PHP files with skeleton
+PhpDocblocks. PHP not being my first language, I decided why not do it in ruby. I find ruby scripting to be
+quick, fast enough, and it has lots of great easy to use modules (e.g., [Find][1].)
 
-That said here she is:
+That said, here she is:
 
 {% highlight ruby %}
 #!/usr/bin/env ruby
@@ -168,3 +170,5 @@ if $0 == __FILE__
   puts "Modified #{modified} files"
 end
 {% endhighlight %}
+
+[1]: http://ruby-doc.org/core/classes/Find.html "Ruby Find module"
