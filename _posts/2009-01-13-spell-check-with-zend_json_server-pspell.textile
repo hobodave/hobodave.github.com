@@ -23,7 +23,7 @@ h3. Files
 
 h4. SpellCheck.php
 
-{% highlight php linenos %}
+{% highlight php %}
 <?php
 /**
  * SpellCheck
@@ -105,7 +105,7 @@ The *checkText* method combines the features of both check and suggest, and work
 
 h4. json-rpc.php
 
-{% highlight php linenos %}
+{% highlight php %}
 <?php
 set_include_path('./lib:.');
 
