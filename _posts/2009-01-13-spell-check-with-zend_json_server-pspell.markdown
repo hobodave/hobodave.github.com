@@ -2,6 +2,9 @@
 layout: post
 title: Spell check with Zend_Json_Server & pspell
 ---
+
+<p class="large quiet">{{ page.date | date_to_string }}</p>
+
 An application I've been working on has had a desire for spell check capabilities for some time now. As most browsers
 provide native methods for this, it has remained on the back burner until now.
 
