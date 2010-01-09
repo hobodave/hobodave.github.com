@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Moving to Jekyll & Disqus
+title: Moving to Jekyll &amp; Disqus
 ---
 
 <p class="large quiet">{{ page.date | date_to_string }}</p>

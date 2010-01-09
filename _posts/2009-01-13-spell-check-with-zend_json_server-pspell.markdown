@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spell check with Zend_Json_Server & pspell
+title: Spell check with Zend_Json_Server &amp; pspell
 ---
 
 <p class="large quiet">{{ page.date | date_to_string }}</p>
