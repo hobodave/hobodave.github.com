@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Simple Nagios probes in ruby
+tags: [gem, ruby, nagios]
 ---
 
 I needed to write a custom nagios probe a few weeks ago. I googled for existing solutions in Ruby, but surprisingly
