@@ -4,7 +4,7 @@ title: David Abdemoulaie
 ---
 
 {% for post in site.posts limit:3 %}
-<h2><a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;<span class="date">{{ post.date | date_to_string }}</span></h2>
+<h2><a href="{{ post.url }}">{{ post.title }}</a><span class="date">{{ post.date | date_to_string }}</span></h2>
 <p>
 {{ post.content }}
 <a class="comment_count quiet" href="{{ post.url }}#disqus_thread"></a>
