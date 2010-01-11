@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://hobodave.com/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/about/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2010/01/10/simple-nagios-probes-in-ruby/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2010/01/08/moving-to-jekyll-disqus/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2009/07/30/how-to-ask-for-help-with-mysql-performance/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2009/01/13/spell-check-with-zend_json_server-pspell/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2008/10/27/zend_log_writer_firebug-gotcha/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://hobodave.com/2008/06/23/phpghettodoc-document-your-php-w-ruby/</loc>
+  <lastmod>2010-01-11T03:40:16+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+</urlset>
