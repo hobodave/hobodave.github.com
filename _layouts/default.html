@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -27,40 +27,60 @@
 </head>
 <body>
 <div class="site container">
-    <div class="title span-20 prepend-2 append-2 prepend-top last">
-        <h2><a class="large" href="/">David Abdemoulaie</a>
-            <a class="extra" href="/">home</a>
-            <a class="extra" href="/about/">about</a>
-        </h2>
+    <h1 class="title"><a href="/">hobodave.com</a></h1>
+    <hr />
+    <div class="nav span-16 append-1">
+        <a href="/">home</a>
+        <a href="/about/">about</a>
     </div>
+    <div class="span-7 last rss">
+        <a href="http://feeds.feedburner.com/hobodave">
+            <img src="/images/feed-icon-28x28.png" alt="Subscribe to RSS Feed" />
+        </a>
+    </div>
+    <hr />
 
-    <div class="span-20 prepend-2 append-2 last">
+    <div class="span-16 colborder">
     {{ content }}
     </div>
 
-    <div class="span-20 prepend-2 append-2 prepend-top last">
-        <div class="footer span-20 last">
-            <div class="contact span-4 prepend-top">
-                <p>
-                    David Abdemoulaie<br />
-                    &#100;&#97;&#x76;&#x65;&#64;&#104;&#x6f;&#x62;&#x6f;&#100;&#97;&#118;&#101;&#46;&#99;&#111;&#109;
-                </p>
-            </div>
-            <div class="contact span-14 prepend-top">
-                <p>
-                    <a href="http://github.com/hobodave/">github.com/hobodave</a><br />
-                    <a href="http://twitter.com/hobodave/">twitter.com/hobodave</a>
-                </p>
-            </div>
-            <div class="rss span-2 last prepend-top">
-                <a href="http://feeds.feedburner.com/hobodave">
-                    <img src="/images/feed-icon.png" alt="Subscribe to RSS Feed" />
-                </a>
-            </div>
+    <div id="sidebar" class="span-7 last">
+        <h6>About</h6>
+        <p>This is the blog of David Abdemoulaie. See the about page for more details.</p>
+
+        <h6>Blogroll</h6>        
+        <div class="span-7 last">
+        <ul class="pull-1">
+            <li><a href="http://akrabat.com/">Rob Allen</a></li>
+            <li><a href="http://blog.astrumfutura.com/">Pádraic Brady</a></li>
+            <li><a href="http://codeutopia.net/blog/">Jani Hartikainen</a></li>
+            <li><a href="http://www.rmauger.co.uk/">Ryan Mauger</a></li>
+            <li><a href="http://ralphschindler.com/">Ralph Schindler</a></li>
+            <li><a href="http://www.dasprids.de/">Ben Scholzen</a></li>
+            <li><a href="http://blog.robinsk.net/">Robin Skoglund</a></li>
+            <li><a href="http://www.norm2782.com/">Jurrien Stutterheim</a></li>
+            <li><a href="http://weierophinney.net/matthew/">Matthew Weier O'Phinney</a></li>
+        </ul>
+        </div>
+        <h6>Recent posts</h6>
+        <div class="span-7 last">
+            <ul class="pull-1 posts">
+            {% for post in site.posts limit:10 %}
+                <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+            {% endfor %}
+            </ul>
         </div>
     </div>
+    <hr />
+
+    <div class="span-24 last">
+        <p>
+            Copyright &copy; 2010 David Abdemoulaie. All rights reserved. Hosted by
+            <a href="http://github.com/hobodave/hobodave.github.com/">GitHub</a> and
+            powered by <a href="http://github.com/mojombo/jekyll/">Jekyll</a>.
+        </p>
+    </div>
 </div>
-<a href="http://github.com/hobodave"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" /></a>
 <script type="text/javascript">
 //<![CDATA[
 (function() {

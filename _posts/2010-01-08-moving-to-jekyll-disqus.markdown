@@ -3,8 +3,6 @@ layout: post
 title: Moving to Jekyll &amp; Disqus
 ---
 
-<p class="large quiet">{{ page.date | date_to_string }}</p>
-
 I moved my blog to [GitHub Pages][1] today. I've decided to stop tinkering with new blog software every few months.
 I've gone from [LiveJournal][2] to [Typo][3] to [Mephisto][4] to [WordPress][5] to [Chyrp][6]; it was fun while it
 lasted. 

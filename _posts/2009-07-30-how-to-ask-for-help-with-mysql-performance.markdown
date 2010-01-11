@@ -3,8 +3,6 @@ layout: post
 title: How to ask for help with MySQL performance
 ---
 
-<p class="large quiet">{{ page.date | date_to_string }}</p>
-
 Since discovering [StackOverflow][1] I've become hopelessly addicted (<strike>see the badge to the right</strike>). 
 I answer the [mysql][2], [php][3], [zend-framework][4], and [javascript][5] categories mostly.
 

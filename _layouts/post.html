@@ -2,9 +2,10 @@
 layout: default
 ---
 <h2>{{ page.title }}</h2>
-<div id="post">
+<p class="large quiet">{{ page.date | date_to_string }}</p>
+<p id="post">
 {{ content }}
-</div>
+</p>
 <script src="http://feeds.feedburner.com/~s/hobodave?i=http://hobodave.com{{ page.url }}" type="text/javascript"></script>
 <div id="disqus_thread"></div>
 <script type="text/javascript" src="http://disqus.com/forums/hobodave/embed.js"></script>

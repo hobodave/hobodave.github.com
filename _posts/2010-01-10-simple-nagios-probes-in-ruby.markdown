@@ -2,6 +2,7 @@
 layout: post
 title: Simple Nagios probes in ruby
 ---
+
 I needed to write a custom nagios probe a few weeks ago. I googled for existing solutions in Ruby, but surprisingly
 found none. A nagios probe can really be written in any language, it just has to return a single line of output and
 an exit code of 0 (OK), 1 (WARNING), 2 (CRITICAL), or 3 (UNKNOWN). I chose Ruby because of the syntactical simplicity,

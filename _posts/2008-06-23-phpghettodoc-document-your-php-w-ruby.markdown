@@ -3,8 +3,6 @@ layout: post
 title: PhpGhettoDoc - Document your PHP w/ ruby?
 ---
 
-<p class="large quiet">{{ page.date | date_to_string }}</p>
-
 In a moment of boredom I decided I needed a simple way to document a giant batch of PHP files with skeleton
 PhpDocblocks. PHP not being my first language, I decided why not do it in ruby. I find ruby scripting to be
 quick, fast enough, and it has lots of great easy to use modules (e.g., [Find][1].)
