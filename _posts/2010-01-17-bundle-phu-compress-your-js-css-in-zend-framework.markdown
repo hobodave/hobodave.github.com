@@ -36,8 +36,8 @@ Bundle-phu is inspired by, [bundle-fu][4] a Ruby on Rails equivalent.
 ### After
 
     {% highlight html %}
-    <script type="text/javascript" src="bundle_3f84da97fc873ca8371a8203fcdd8a82.css?1234567890"></script>
-    <link type="text/css" src="bundle_3f84da97fc873ca8371a8203fcdd8a82.css?1234567890"></script>
+    <script type="text/javascript" src="bundle_3f8ca8371a8203fcdd8a82.css?1234567890"></script>
+    <link type="text/css" src="bundle_3f8ca8371a8203fcdd8a82.css?1234567890"></script>
     {% endhighlight %}
 
 ### Highlights
@@ -74,6 +74,10 @@ via callback in PHP.
                 $view->getHelper('BundleScript')
                     ->setCacheDir(PATH_PROJECT . '/data/cache/js')
                     ->setDocRoot(PATH_PROJECT . '/public')
+                    ->setUseMinify(true)
+                    ->setMinifyCommand('java -jar yuicompressor -o :filename)
+                    ->setUseGzip(true)
+                    ->setGzipLevel(9)
                     ->setUrlPrefix('/javascripts');
 
                 $view->getHelper('BundleLink')
