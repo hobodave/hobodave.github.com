@@ -75,7 +75,7 @@ via callback in PHP.
                     ->setCacheDir(PATH_PROJECT . '/data/cache/js')
                     ->setDocRoot(PATH_PROJECT . '/public')
                     ->setUseMinify(true)
-                    ->setMinifyCommand('java -jar yuicompressor -o :filename)
+                    ->setMinifyCommand('java -jar yuicompressor -o :filename')
                     ->setUseGzip(true)
                     ->setGzipLevel(9)
                     ->setUrlPrefix('/javascripts');
