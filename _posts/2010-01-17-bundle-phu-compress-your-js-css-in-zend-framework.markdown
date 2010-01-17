@@ -22,6 +22,7 @@ Bundle-phu is inspired by, [bundle-fu][4] a Ruby on Rails equivalent.
 
 ### Before
 
+    {% highlight html %}
     <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript" src="/js/foo.js"></script>
     <script type="text/javascript" src="/js/bar.js"></script>
@@ -30,12 +31,14 @@ Bundle-phu is inspired by, [bundle-fu][4] a Ruby on Rails equivalent.
     <link media="screen" type="text/css" href="/css/foo.css" />
     <link media="screen" type="text/css" href="/css/bar.css" />
     <link media="screen" type="text/css" href="/css/baz.css" />
-
+    {% endhighlight %}
+    
 ### After
 
+    {% highlight html %}
     <script type="text/javascript" src="bundle_3f84da97fc873ca8371a8203fcdd8a82.css?1234567890"></script>
     <link type="text/css" src="bundle_3f84da97fc873ca8371a8203fcdd8a82.css?1234567890"></script>
-
+    {% endhighlight %}
 
 ### Highlights
 
@@ -56,6 +59,7 @@ via callback in PHP.
 
 2. Add the BundlePhu view helpers to your view's helper path, and configure the helpers:
 
+        {% highlight php %}
         <?php
         class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         {
@@ -82,6 +86,7 @@ via callback in PHP.
                 return $view;
             }
         }
+        {% endhighlight %}
 
 3.  Ensure your CacheDir is writable by the user your web server runs as
 4.  Using either an Alias (apache) or location/alias (nginx) map the UrlPrefix to CacheDir.
@@ -92,10 +97,11 @@ via callback in PHP.
 
 As both these helpers extend from the existing HeadScript and HeadLink helpers in [Zend Framework][1],
 you can use them just as you do those.
-
+  
+    {% highlight php %}
     <? $this->bundleScript()->offsetSetFile(00, $this->baseUrl('/js/jquery.js')) ?>
     <? $this->bundleScript()->appendFile($this->baseUrl('/js/foo.js')) ?>
-
+    {% endhighlight %}
 
 
 [1]: http://github.com/hobodave/bundle-phu
