@@ -16,10 +16,14 @@ by PHP.
 * Automatically detect modification the the source files, and update bundles as needed.
 
 Thus, I created [bundle-phu][1]. Bundle-phu is a set of [Zend Framework][2] view helpers
-that do all of the above. Please see the README on [github] for Usage and Installation
+that do all of the above. Bundle-phu is inspired by, and the name is stolen and mangled
+from [bundle-fu][4] a Ruby on Rails equivalent.
+
+Please see the README on [github] for Usage and Installation
 instructions. Feel free to ask any questions in the comments, or use the [issue tracker][3]
 to report bugs.
 
 [1]: http://github.com/hobodave/bundle-phu
 [2]: http://framework.zend.com/
 [3]: http://github.com/hobodave/bundle-phu/issues
+[4]: http://code.google.com/p/bundle-fu/
