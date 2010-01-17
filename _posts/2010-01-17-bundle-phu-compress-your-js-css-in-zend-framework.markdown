@@ -63,7 +63,7 @@ via callback in PHP.
         <?php
         class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         {
-            protected function $_initView()
+            protected function _initView()
             {
                 $view = new Zend_View();
                 $view->addHelperPath(
