@@ -1,6 +1,6 @@
 ---
 layout: post
-title: bundle-phu minify, bundle, and compress your js/css in Zend Framework
+title: bundle-phu: minify, bundle, and compress your js/css in Zend Framework
 tags: [zend framework, css, javascript, bundle-phu]
 ---
 
