@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: plain
 title: About Me
 ---
 I am a 29 year old web developer (PHP/Javascript/Rails) for a healthcare organization in Chicago, IL.
