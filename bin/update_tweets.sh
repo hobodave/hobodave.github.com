@@ -10,6 +10,7 @@ BASEDIR=`pwd`
 
 $RUBY ${BASEDIR}/bin/twit.rb > ${BASEDIR}/_includes/twitter.html
 
+eval $(ssh-agent)
 $GIT reset HEAD .
 $GIT add _includes/twitter.html
 $GIT commit -m "Automatic tweet update" _includes/twitter.html
