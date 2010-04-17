@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<title>QuickTime Player - Export for Web - Textmate Snippets</title>
+	<script src="http://www.apple.com/library/quicktime/2.0/scripts/prototype.js" language="JavaScript" type="text/javascript"></script>
+	<script src="http://www.apple.com/library/quicktime/2.0/scripts/qtp_poster.js" language="JavaScript" type="text/javascript"></script>
+	<script language="JavaScript" type="text/javascript">
+		var setJSControllerEnabled = function(enabled) {
+			var poster = document.getElementsByClassName("QTP")[0].poster;
+			if(enabled)
+				poster.controller.element.style.display = "";
+			else
+				poster.controller.element.style.display = "none";
+			poster.attributes.controller = enabled ? "false" : "true";
+			document.getElementById(enabled ? "jscontrollerenabled" : "jscontrollerdisabled").style.display = "";
+			document.getElementById(enabled ? "jscontrollerdisabled" : "jscontrollerenabled").style.display = "none";
+			if(poster.movie)
+				poster.movie.element.SetControllerVisible(!enabled);
+		}		
+	</script>
+	<script language="JavaScript" type="text/javascript">QTP.Poster.prototype.clickText = "Click To Play";</script>
+	<link href="http://www.apple.com/library/quicktime/2.0/stylesheets/qtp_poster.css" rel="StyleSheet" type="text/css" />
+</head>
+<body>
+<a href="Textmate%20Snippets.mov" rel="qtposter">
+	<img src="Textmate%20Snippets.jpg" width="768" height="496" />
+</a>
+</body>
+</html>
