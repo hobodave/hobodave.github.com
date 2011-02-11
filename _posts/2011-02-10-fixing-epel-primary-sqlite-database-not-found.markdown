@@ -16,7 +16,7 @@ I went to install a package today. A simple `yum install php53u-gd` resulted in 
 wall of 404 error messages when it tried to fetch some cryptic bzipped file:
 
 {% highlight text %}
-http://nas1.itc.virginia.edu/fedora-epel/5/x86_64/repodata/bd1dac3a3d6ad62385741a9d50273ec1b2bcbd76-primary.sqlite.bz2: 
+http://nas1.itc.virginia.edu/fedora-epel/5/x86_64/repodata/bd1da...-primary.sqlite.bz2: 
  [Errno 14] HTTP Error 404: Not Found
 Trying other mirror.
 Error: failure: 
@@ -24,7 +24,7 @@ repodata/bd1dac3a3d6ad62385741a9d50273ec1b2bcbd76-primary.sqlite.bz2 from
 epel: [Errno 256] No more mirrors to try.
 {% endhighlight %}
 
-I tried repeatedly to clean the yum metadata and cache, even `yum clean all` a few times.
+I tried repeatedly to clean the yum metadata and cache, even `yum clean all` a few times. The problem persisted.
 
 
 ### Troubleshooting ###
@@ -39,21 +39,16 @@ this information from? I asked around on IRC (#epel on freenode) and "nirik" sug
 `URLGRABBER_DEBUG=1 yum update` which gave me the following output:
 
 {% highlight text %}
-2011-02-10 22:28:41,838 MIRROR: trying repodata/repomd.xml -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
+MIRROR: trying repodata/repomd.xml -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
 INFO:urlgrabber:MIRROR: trying repodata/repomd.xml -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
-2011-02-10 22:28:41,838 attempt 1/10: http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
 INFO:urlgrabber:attempt 1/10: http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
-2011-02-10 22:28:41,839 creating new connection to mirrors.servercentral.net (405445232)
 INFO:urlgrabber:creating new connection to mirrors.servercentral.net (405445232)
-2011-02-10 22:28:41,888 STATUS: 200, OK
 INFO:urlgrabber:STATUS: 200, OK
-epel                                                                                                                                                        | 3.7 kB     00:00     
-2011-02-10 22:28:41,920 success
 INFO:urlgrabber:success
-2011-02-10 22:28:41,921 MIRROR: trying repodata/bd1dac3a3d6ad62385741a9d50273ec1b2bcbd76-primary.sqlite.bz2 -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/bd1dac3a3d6ad62385741a9d50273ec1b2bcbd76-primary.sqlite.bz2
+MIRROR: trying repodata/bd1da...-primary.sqlite.bz2 -> http://mirrors.servercentral.net/...
 {% endhighlight %}
 
-Navigating to the [ServerCentral EPEL mirror ][4] showed me the problem.
+Navigating to the [ServerCentral EPEL mirror][4] showed me the problem.
 
 ![servercentral repodata](/images/repodata.png)
 
