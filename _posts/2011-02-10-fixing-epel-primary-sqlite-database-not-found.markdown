@@ -1,6 +1,6 @@
 ---
 layout: post
-title: EPEL: primary.sqlite.bz2 404 Not Found errors
+title: EPEL primary.sqlite.bz2 404 Not Found errors
 tags: [centos, epel]
 ---
 
