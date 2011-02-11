@@ -39,13 +39,10 @@ this information from? I asked around on IRC (#epel on freenode) and "nirik" sug
 `URLGRABBER_DEBUG=1 yum update` which gave me the following output:
 
 {% highlight text %}
-MIRROR: trying repodata/repomd.xml -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
-INFO:urlgrabber:MIRROR: trying repodata/repomd.xml -> http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
 INFO:urlgrabber:attempt 1/10: http://mirrors.servercentral.net/fedora/epel/5/x86_64/repodata/repomd.xml
 INFO:urlgrabber:creating new connection to mirrors.servercentral.net (405445232)
 INFO:urlgrabber:STATUS: 200, OK
 INFO:urlgrabber:success
-MIRROR: trying repodata/bd1da...-primary.sqlite.bz2 -> http://mirrors.servercentral.net/...
 {% endhighlight %}
 
 Navigating to the [ServerCentral EPEL mirror][4] showed me the problem.
